@@ -3,6 +3,8 @@ Thermostat
 
 Smart Home Thermostat with Web interface, customizable options, weekly On/Off schedule programming, presence detector (respects privacy) and weather data.
 
+![Thermostat on a tablet](screenshot-1.png)
+
 
 ## Features
 
