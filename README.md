@@ -80,7 +80,7 @@ My Thermostat activates through a cable running at 26.7VAC 8.68mA (measured than
         - Send temperature
         - GET /status to see if 1 or 0 and turn on or off the rele (HARD)
 - Web Server (PHP, SQLite, Apache):
-    `sudo apt-get install php7.4-sqlite3`
+    `sudo apt install php7.4-sqlite3`
     - PHP script
         - Web portal
             - User Interface
@@ -100,6 +100,13 @@ You can use this tool https://xaviesteve.com/pro/tools.php (Password generator) 
 ### Customize parameters
 
 (optional) You can edit `index.php` (or `params.php` once it has been generated on first run) to customize a few extra settings such as the weekly schedule, your coordinates, Weather API key and so on.
+
+
+### Web Server
+
+A PHP server with SQLite (`sudo apt install php7.4-sqlite3`).
+
+
 
 ### Thermostat Raspberry
 
@@ -129,7 +136,7 @@ Now give your smartphones' fixed IPs and add them to the `thermo.py` file.
 For the Raspberry with the temperature sensor:
 
 ```bash
-sudo apt-get install git-core
+sudo apt install git-core
 git clone https://github.com/szazo/DHT11_Python.git
 cd DHT11_Python
 sudo apt install python3-pip
@@ -188,7 +195,7 @@ chmod u+x thermo.py
 Install the cron on all your Raspberry Pi
 
 ```bash
-sudo apt-get install cron
+sudo apt install cron
 sudo crontab -e
 ```
 
