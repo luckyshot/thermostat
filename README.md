@@ -3,8 +3,9 @@ Thermostat
 
 Smart Home Thermostat with Web interface, customizable options, weekly On/Off schedule programming, presence detector (respects privacy) and weather data.
 
-![Thermostat on a tablet](screenshot-1.png)
+![Thermostat view on a tablet](photo-screenshot-tablet.png)
 
+_I've posted more photos at the bottom of the README._
 
 ## Features
 
@@ -19,7 +20,7 @@ Smart Home Thermostat with Web interface, customizable options, weekly On/Off sc
 - Extremely easy to hack and customize to your liking
 
 
-**Disclaimer**: _Please do your own research, you will be dealing with hardware components, I am not an expert and may have made mistakes or your particular setup may differ._
+**Disclaimer**: _Please do your own research, you will be dealing with hardware components. I may have made mistakes or your particular setup may differ._
 
 
 ## What you need (minimum-ideal)
@@ -41,13 +42,19 @@ Smart Home Thermostat with Web interface, customizable options, weekly On/Off sc
 These are the things I bought and have worked for me, your setup may vary.
 
 - Raspberry Pi (any works, I've got a 3 and a 4)
-- [Temperature sensors](https://amzn.to/3tbv3LE) (7€)
+- [DHT11 Temperature sensors](https://amzn.to/3tbv3LE) (around 3€ each)
+    - or [DHT22 Temperature sensors](https://amzn.to/3zfUe24) (around 6€ each)
 - [Relay](https://amzn.to/3teyIbK) (5€)
 - [Cables](https://amzn.to/3wSyWra) (7€)
 - (optional) [Multimeter](https://amzn.to/2Q3ownQ) (15€)
 - (optional) [Digital Ocean web server](https://www.digitalocean.com/?refcode=b64e38702701) (4€/month, use the link for 2 months free)
 
 TOTAL: 34€ (for a 300-500€ thermostat! 🥳)
+
+
+#### DHT11 or DHT22 sensor, which one should you choose?
+
+The DHT11 is cheaper but less accurate, it cannot detect temperatures below 0°C and humidity-wise is not very precise, so if you live in a cold area or need humidity to be really accurate, get the DHT22. I got the DHT11 when starting this project just because I didn't have any idea if it would even work, now that I've been running Thermostat for more than a year I've just ordered the DHT22.
 
 
 ### Compatibility
@@ -57,7 +64,7 @@ Compatible with very old devices (including iPad 1 and probably old Internet Exp
 
 ## My setup
 
-I've got two Raspberry Pi: one I use it for watching TV (using LibreElec+Kodi) so it sits besides my TV and the other one is a file backup generator (using Syncthing) that can be placed anywhere.
+I've got two Raspberry Pi: one I use it for watching TV (using OSMC + Kodi) so it sits besides my TV in the living room and the other one is a file backup generator (using Syncthing) placed next to my thermostat.
 
 Raspberry 1 will detect indoor temperature and presence, and Raspberry 2 will detect outdoors temperature and activate the Thermostat On/Off through the relay.
 
@@ -78,14 +85,15 @@ My Thermostat activates through a cable running at 26.7VAC 8.68mA (measured than
         - Temperature sensor (placed outdoors with a long cable so we get accurate exterior temperature)
     - Software:
         - Send temperature
-        - GET /status to see if 1 or 0 and turn on or off the rele (HARD)
+        - GET `/status` to see if 1 or 0 and turn on or off the rele (HARD)
 - Web Server (PHP, SQLite, Apache):
     `sudo apt install php7.4-sqlite3`
     - PHP script
         - Web portal
             - User Interface
-            - Manual on/off buttons and timers ("set it on for 30 minutes")
-            - Chart: temperature, humidity, status, event logs (manual on/off, manual_off_interval...)
+            - Buttons to turn thermostat On/Off and set an On timer ("_set it on for 30 minutes_")
+            - Charts, indoor/outdoor/city temperatures and humidity, thermostat status, event logs
+            - Customize the temperature range
         - API
             - Receive data from all devices
             - Return thermostat status
@@ -104,8 +112,11 @@ You can use this tool https://xaviesteve.com/pro/tools.php (Password generator) 
 
 ### Web Server
 
-A PHP server with SQLite (`sudo apt install php7.4-sqlite3`).
+A PHP server with SQLite.
 
+```sh
+sudo apt install php7.4-sqlite3
+```
 
 
 ### Thermostat Raspberry
@@ -144,12 +155,14 @@ pip3 install -U setuptools
 python3 -m pip install .
 ```
 
-The GPIO pins for temperature sensor (Raspberry 3B and 4B) that I have used looks like this:
+The GPIO pins for the DHT11 temperature sensor (Raspberry 3B and 4B) that I have used looks like this:
 
+```
                 ¡
 ···········3··· ¡
 ············2·1 ¡
 ----------------/
+```
 
 1. (+) Red
 2. (-) Black
@@ -225,3 +238,27 @@ Cronjob (every 5 minutes)
 I hated the idea of having cameras or microphones listening all the time so I came with the idea of simply tracking specific devices connected to the home's Wi-Fi. For example, my mobile phone. If I'm home, my phone will be with me and auto-connect to the Wi-Fi, and disconnect when I leave home.
 
 It doesn't track individually, it just tracks if there's any of the devices connected. You could even set your TV to be the device, or a smart bulb. If you set your phone you can always disable Wi-Fi and use cellular data to remain undetected.
+
+
+
+## Photos of my setup
+
+This is how Thermostat looks like on an iPad 1, I have it in my living room and it works great as a clock and a weather station to see when it's going to rain:
+
+![Thermostat on a tablet](photo-ipad-1.jpeg)
+
+The DHT11 placed on a wooden surface away from any heat source or air current:
+
+![DHT11 sensor](photo-dht11.jpeg)
+
+How I've connected the DHT11 temperature sensor:
+
+![DHT11 connection](photo-pi3-sensor.jpeg)
+
+The Raspberry with the DHT11 temperature sensor and the Relay to turn on/off the thermostat:
+
+![Thermostat on a tablet](photo-pi3b-temp-and-relay.jpeg)
+
+The relay connected to the thermostat:
+
+![Thermostat on a tablet](photo-relay.jpeg)
