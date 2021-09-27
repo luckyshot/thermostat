@@ -3,7 +3,7 @@
 
 Smart Home Thermostat with Web interface, customizable options, weekly On/Off schedule programming, presence detector (respects privacy) and weather data.
 
-![Thermostat on an iPad 1](photo-ipad-1.jpeg)
+![Thermostat on an iPad 1](images/photo-ipad-1.jpeg)
 
 _I've posted more photos at the bottom of the README._
 
@@ -279,25 +279,25 @@ The Raspberry Pi 3 B+ uses 3W but it has Syncthing in it with an old external US
 
 This is how Thermostat looks like on an iPad 1, I have it in my living room and it works great as a clock and a weather station to see when it's going to rain:
 
-![Thermostat on a tablet](photo-ipad-1.jpeg)
+![Thermostat on a tablet](images/photo-ipad-1.jpeg)
 
 The DHT11 placed on a wooden surface away from any heat source or air current:
 
-![DHT11 sensor](photo-dht11.jpeg)
+![DHT11 sensor](images/photo-dht11.jpeg)
 
 How I've connected the DHT11 temperature sensor:
 
-![DHT11 connection](photo-pi3-sensor.jpeg)
+![DHT11 connection](images/photo-pi3-sensor.jpeg)
 
 The Raspberry with the DHT11 temperature sensor and the Relay to turn on/off the thermostat:
 
-![Thermostat on a tablet](photo-pi3b-temp-and-relay.jpeg)
+![Thermostat on a tablet](images/photo-pi3b-temp-and-relay.jpeg)
 
 The relay connected to the thermostat:
 
-![Thermostat on a tablet](photo-relay.jpeg)
+![Thermostat on a tablet](images/photo-relay.jpeg)
 
 This is a screenshot of the web view in a tablet:
 
-![Thermostat view on a tablet](photo-screenshot-tablet.png)
+![Thermostat view on a tablet](images/photo-screenshot-tablet.png)
 
