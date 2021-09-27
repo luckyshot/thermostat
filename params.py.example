@@ -3,11 +3,11 @@ import Adafruit_DHT
 
 server_url = 'https://example.com?view=console&auth_token='
 
-enable_sensor   = 1
 enable_sensor_ext = 0
-enable_presence = 1
-enable_relay    = 0
-enable_test     = 0
+enable_sensor   = 1 # Temperature sensor
+enable_presence = 1 # Presence detector
+enable_relay    = 0 # Relay switch
+enable_test     = 0 # Dry run, don't send data to server
 
 sensor_model = Adafruit_DHT.DHT22 # Adafruit_DHT.DHT11, Adafruit_DHT.DHT22, Adafruit_DHT.AM2302
 sensor_pin = 17
