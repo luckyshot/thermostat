@@ -32,8 +32,8 @@ _I've posted more photos at the bottom of the README._
 
 ### Setup overview
 
-- Run one Python script on each Raspberry Pi (set a 5 min cronjob)
-- A simple PHP web server with a few files (no MySQL database needed)
+- Python script on each Raspberry Pi (with a 5 min cronjob)
+- PHP script on web server with a few files (no MySQL database needed)
 - (optional) A free API key from openweathermap to get your location's weather
 
 
@@ -43,11 +43,11 @@ These are the things I bought and have worked for me, your setup may vary.
 
 - Raspberry Pi (any works, I've tested it with a 3B+, a 4B and a Zero W)
 - [DHT11 Temperature sensors](https://amzn.to/3tbv3LE) (around 3€ each)
-    - or [DHT22 Temperature sensors](https://amzn.to/3zfUe24) (around 6€ each)
-- [Relay](https://amzn.to/3teyIbK) (5€)
-- [Cables](https://amzn.to/3wSyWra) (7€)
+    - or [DHT22 Temperature sensors](https://amzn.to/3zfUe24) (around 6€ each, you may get a 10k Ohm resistor too)
+- [Relay switch](https://amzn.to/3teyIbK) (5€)
+- [Dupont Cables](https://amzn.to/3wSyWra) (7€)
 - (optional) [Multimeter](https://amzn.to/2Q3ownQ) (15€)
-- (optional) [Digital Ocean web server](https://www.digitalocean.com/?refcode=b64e38702701) (4€/month, use the link for 2 months free)
+- (optional) [Cheap web server](https://xaviesteve.com/go/hetzner) (link gets you 5 months free on a 4€/month server)
 
 TOTAL: 34€ (for a 300-500€ thermostat! 🥳)
 
