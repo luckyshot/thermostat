@@ -25,8 +25,8 @@ _I've posted more photos at the bottom of the README._
 
 ## What you need (minimum-ideal)
 
-- 1-2 Raspberry Pi (non-exclusive, you can use them for other things simultaneously such as for Kodi, Syncthing or PiHole)
-- 1-2 temperature sensors (the second one is optional if you want outdoors measuring, although the weather API works too)
+- 1 or 2 Raspberry Pi (non-exclusive, you can use them for other things simultaneously such as for Kodi, Syncthing or PiHole)
+- 1 temperature sensor for each Raspberry
 - 1 relay switch to turn ON-OFF the thermostat
 - Cable (Dupont wires, although any old/broken USB or phone cable works too)
 
@@ -34,14 +34,14 @@ _I've posted more photos at the bottom of the README._
 
 - Run one Python script on each Raspberry Pi (set a 5 min cronjob)
 - A simple PHP web server with a few files (no MySQL database needed)
-- A free API key from openweathermap to get your location's weather
+- (optional) A free API key from openweathermap to get your location's weather
 
 
-### Shopping list
+### 🛒 Shopping list
 
 These are the things I bought and have worked for me, your setup may vary.
 
-- Raspberry Pi (any works, I've got a 3 and a 4)
+- Raspberry Pi (any works, I've tested it with a 3B+, a 4B and a Zero W)
 - [DHT11 Temperature sensors](https://amzn.to/3tbv3LE) (around 3€ each)
     - or [DHT22 Temperature sensors](https://amzn.to/3zfUe24) (around 6€ each)
 - [Relay](https://amzn.to/3teyIbK) (5€)
@@ -52,12 +52,12 @@ These are the things I bought and have worked for me, your setup may vary.
 TOTAL: 34€ (for a 300-500€ thermostat! 🥳)
 
 
-### Compatibility
+### ✅ Compatibility
 
 Compatible with very old devices (including iPad 1 and probably old Internet Explorers) so you can use retired devices as controllers/displays, they just need a somewhat decent web browser. The Web interface has been coded in a way that doesn't require too modern web technologies.
 
 
-## My setup
+## 🤩 My setup
 
 I've got two Raspberry Pi: one I use it for watching TV (using OSMC + Kodi) so it sits besides my TV in the living room and the other one is a file backup generator (using Syncthing) placed next to my thermostat.
 
@@ -66,7 +66,7 @@ Raspberry 1 will detect indoor temperature and presence, and Raspberry 2 will de
 My Thermostat activates through a cable running at 26.7VAC 8.68mA (measured thanks to the Multimeter I bought for 15€). When this cable is bridged it turns ON, and when you unbridge it it turns Off. I got a relay which can handle up to 250V and 10A, it's inexpensive and you'd better get something decent for safety reasons and so you can reuse for other projects.
 
 
-### Overview
+### ℹ️ Overview
 
 - Raspberry 1 (indoors, living room)
     - Hardware:
@@ -94,7 +94,7 @@ My Thermostat activates through a cable running at 26.7VAC 8.68mA (measured than
             - Return thermostat status
 
 
-## SETUP
+## ⚙ SETUP
 
 ### Generate a security token
 
@@ -107,7 +107,7 @@ Rename `params.py.example` to `params.py` and modify its settings for each Raspb
 (optional) You can edit `index.php` (or `params.php` once it has been generated on first run) to customize a few extra settings such as the weekly schedule, your coordinates, Weather API key and so on.
 
 
-### Web Server
+### 📟 Web Server
 
 A PHP server with SQLite.
 
@@ -116,7 +116,7 @@ sudo apt install php7.4-sqlite3
 ```
 
 
-### Thermostat Raspberry
+### 📟 Thermostat Raspberry
 
 For the Raspberry with the Thermostat ON/OFF Relay:
 
@@ -128,7 +128,7 @@ sudo apt install wiringpi
 # This shows info on all pins `gpio readall`
 ```
 
-### Presence Raspberry
+### 📟 Presence Raspberry
 
 For the Raspberry that will do the presence detector
 
@@ -139,7 +139,7 @@ pip install pythonping
 Now give your smartphones' fixed IPs and add them to the `params.py` file.
 
 
-### Temperature Raspberry
+### 📟 Temperature Raspberry
 
 For the Raspberry with the temperature sensor:
 
@@ -185,7 +185,7 @@ Pins are like this in the 4-pin white DHT22:
 ```
 
 
-### All Raspberries
+### 📟 All Raspberries
 
 Set a static IP on all your Raspberry Pi
 
@@ -238,7 +238,7 @@ Cronjob (every 5 minutes)
 
 
 
-## Frequently Asked Questions
+## ❓ Frequently Asked Questions
 
 #### DHT11 or DHT22 sensor, which one should you choose?
 
@@ -275,7 +275,7 @@ The Raspberry Pi 3 B+ uses 3W but it has Syncthing in it with an old external US
 
 
 
-## Photos of my setup
+## 📷 Photos of my setup
 
 This is how Thermostat looks like on an iPad 1, I have it in my living room and it works great as a clock and a weather station to see when it's going to rain:
 
