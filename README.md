@@ -41,13 +41,13 @@ _I've posted more photos at the bottom of the README._
 
 These are the things I bought and have worked for me, your setup may vary.
 
-- Raspberry Pi (any works, I've tested it with a 3B+, a 4B and a Zero W)
-- [DHT11 Temperature sensors](https://amzn.to/3tbv3LE) (around 3€ each)
-    - or [DHT22 Temperature sensors](https://amzn.to/3zfUe24) (around 6€ each, you may get a 10k Ohm resistor too)
-- [Relay switch](https://amzn.to/3teyIbK) (5€)
-- [Dupont Cables](https://amzn.to/3wSyWra) (7€)
-- (optional) [Multimeter](https://amzn.to/2Q3ownQ) (15€)
-- (optional) [Cheap web server](https://xaviesteve.com/go/hetzner) (link gets you 5 months free on a 4€/month server)
+- [Raspberry Pi](https://amzn.to/2ZswT0E): any model works, I've tested it with 3B+, 4B and Zero W
+- [DHT11 Temperature sensors](https://amzn.to/3tbv3LE): around 3€ each
+    - or [DHT22 Temperature sensors](https://amzn.to/3zfUe24): around 6€ each, you may get a 10k Ohm resistor too
+- [Relay switch](https://amzn.to/3teyIbK): 5€
+- [Dupont Cables](https://amzn.to/3wSyWra): 7€, or use any old network/USB cable
+- (optional) [Multimeter](https://amzn.to/2Q3ownQ): 15€
+- (optional) [Cheap web server](https://xaviesteve.com/go/hetzner): link gets you 5 months free on a 4€/month server
 
 TOTAL: 34€ (for a 300-500€ thermostat! 🥳)
 
@@ -259,6 +259,13 @@ Right now my Raspberry Pi Zero W is using between 0.6 and 0.9W.
 The Raspberry Pi 3 B+ uses 3W but it has Syncthing in it with an old external USB drive, it can go up to 7W whenever it's syncing a lot of stuff and the CPU is at max.
 
 
+
+## 📋 To Do
+
+- Multi-room: right now it's limited to 2 sensors (e.g. indoors+outdoors), make it so we can have several rooms and also choose which ones trigger the thermostat switch, UI should adapt automatically to display all rooms
+- Weekly Schedule: be able to set an end time past midnight (e.g. 7:00am to 2:30am)
+- Clean up: delete old data, keep just max/min daily temperature/humidity
+- Bug: when the temp sensor fails it doesn't send any request so it doesn't receive the status, should retry sensor once more
 
 
 ### Other useful commands
