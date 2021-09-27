@@ -220,8 +220,8 @@ sudo crontab -e
 Cronjob (every 5 minutes)
 
 ```bash
-@reboot ~/thermo.py
-*/5 * * * * ~/thermo.py
+@reboot /home/pi/thermo.py
+*/5 * * * * /home/pi/thermo.py
 ```
 
 
