@@ -159,14 +159,14 @@ The GPIO pins for the DHT11 temperature sensor that I have used looks like this 
 
 ```
                 ¡
-···········3··· ¡
-············2·1 ¡
+···········7··· ¡
+············6·2 ¡
 ----------------/
 ```
 
-1. (+) Red
-2. (-) Black
-3. (out) Brown
+- Pin 2 (5V): (+) Red cable
+- Pin 6 (Ground): (-) Black cable
+- Pin 7 (GPIO4): (out) Brown cable
 
 
 ### All Raspberries
