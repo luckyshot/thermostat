@@ -214,7 +214,7 @@ Install the cron on all your Raspberry Pi
 
 ```bash
 sudo apt install cron
-sudo crontab -e
+crontab -e
 ```
 
 Cronjob (every 5 minutes)
