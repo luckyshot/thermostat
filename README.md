@@ -158,20 +158,37 @@ python3 -m pip install .
 The GPIO pins for the DHT11 temperature sensor that I have used looks like this (Raspberry Pi 4B, 3B+, 3B, 3A+, 2B, B+, A+, Zero, Zero W):
 
 ```
-                ¡
-···········7··· ¡
-············6·2 ¡
+                |
+···········7··· |
+············6·2 |
 ----------------/
 ```
 
-- Pin 2 (5V): (+) Red cable
-- Pin 6 (Ground): (-) Black cable (in the photo it shows as orange when connecting to the sensor, I didn't have a black one long enough)
-- Pin 7 (GPIO4): (out) Brown cable
+- Pin 2 (5V): +
+- Pin 6 (Ground): -
+- Pin 7 (GPIO4): Data/out
 
 
 ### Temperature Raspberry DHT22
 
 You will need a 10k ohm resistor as per https://pimylifeup.com/raspberry-pi-humidity-sensor-dht22/ instructions, this means you'll either need a board or to solder a bit, which may be inconvenient if you're just starting out. While you could exclude the resistor you will likely start to get unreliable measurements from the sensor.
+
+Pins are like this in the 4-pin white DHT22:
+
+```
+####
+####
+####
+||||
+
+1234
+
+1: Voltage
+2: Data
+3: (nothing)
+4: Ground
+
+```
 
 
 ### All Raspberries
