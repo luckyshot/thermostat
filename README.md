@@ -233,12 +233,20 @@ Cronjob (every 5 minutes)
 `gpio -g write 24 1`
 
 
-## How does presence detection work?
+## Frequently Asked Questions
 
-I hated the idea of having cameras or microphones listening all the time so I came with the idea of simply tracking specific devices connected to the home's Wi-Fi. For example, my mobile phone. If I'm home, my phone will be with me and auto-connect to the Wi-Fi, and disconnect when I leave home.
+### How does presence detection work?
 
-It doesn't track individually, it just tracks if there's any of the devices connected. You could even set your TV to be the device, or a smart bulb. If you set your phone you can always disable Wi-Fi and use cellular data to remain undetected.
+I hated the idea of having cameras or microphones listening all the time or watching me so I came with the idea of simply tracking if a specific IP address is connected to the home's Wi-Fi. For example, my mobile phone. If I'm home, my phone will be with me and auto-connect to the Wi-Fi, and disconnect when I leave home.
 
+It doesn't track individually, it just tracks if there's any of the IP addresses in the list connected to the network. You could even set your smart TV to be the device, or a smart bulb, or a desktop computer. If you set your phone and want to become undetected, simply disable Wi-Fi and use cellular data to remain undetected, or change your IP address to another one that's not in the list.
+
+
+### How much power does it consume?
+
+Right now my Raspberry Pi Zero W is using between 0.6 and 0.9W. 
+
+The Raspberry Pi 3 B+ uses 3W but it has Syncthing in it with an old external USB drive, it can go up to 7W whenever it's syncing a lot of stuff and the CPU is at max.
 
 
 ## Photos of my setup
