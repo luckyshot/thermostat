@@ -155,7 +155,7 @@ pip3 install -U setuptools
 python3 -m pip install .
 ```
 
-The GPIO pins for the DHT11 temperature sensor (Raspberry 3B and 4B) that I have used looks like this:
+The GPIO pins for the DHT11 temperature sensor that I have used looks like this (Raspberry Pi 4B, 3B+, 3B, 3A+, 2B, B+, A+, Zero, Zero W):
 
 ```
                 ¡
