@@ -1,5 +1,5 @@
-
+.DS_Store
 .httoken
 params.php
+params.py
 thermo.db
-.DS_Store

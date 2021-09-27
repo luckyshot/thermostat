@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+import Adafruit_DHT
+
+server_url = 'https://example.com?view=console&auth_token='
+
+enable_sensor   = 1
+enable_sensor_ext = 0
+enable_presence = 1
+enable_relay    = 0
+enable_test     = 0
+
+sensor_model = Adafruit_DHT.DHT22 # Adafruit_DHT.DHT11, Adafruit_DHT.DHT22, Adafruit_DHT.AM2302
+sensor_pin = 17
+relay_channel = 24
+ips = ['192.168.1.1']

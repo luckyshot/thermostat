@@ -1,13 +1,13 @@
-Thermostat
+🌡 Thermostat
 =======================
 
 Smart Home Thermostat with Web interface, customizable options, weekly On/Off schedule programming, presence detector (respects privacy) and weather data.
 
-![Thermostat view on a tablet](photo-screenshot-tablet.png)
+![Thermostat on an iPad 1](photo-ipad-1.jpeg)
 
 _I've posted more photos at the bottom of the README._
 
-## Features
+## ⭐ Features
 
 - Control your home thermostat with your phone, laptop or tablet
 - Clean web interface with Temperature and Humidity charts
@@ -50,11 +50,6 @@ These are the things I bought and have worked for me, your setup may vary.
 - (optional) [Digital Ocean web server](https://www.digitalocean.com/?refcode=b64e38702701) (4€/month, use the link for 2 months free)
 
 TOTAL: 34€ (for a 300-500€ thermostat! 🥳)
-
-
-#### DHT11 or DHT22 sensor, which one should you choose?
-
-The DHT11 is cheaper but less accurate, it cannot detect temperatures below 0°C and humidity-wise is not very precise, so if you live in a cold area or need humidity to be really accurate, get the DHT22. I got the DHT11 when starting this project just because I didn't have any idea if it would even work, now that I've been running Thermostat for more than a year I've just ordered the DHT22.
 
 
 ### Compatibility
@@ -107,6 +102,8 @@ You can use this tool https://xaviesteve.com/pro/tools.php (Password generator) 
 
 ### Customize parameters
 
+Rename `params.py.example` to `params.py` and modify its settings for each Raspberry this should run on. Place this file next to the `thermo.py`.
+
 (optional) You can edit `index.php` (or `params.php` once it has been generated on first run) to customize a few extra settings such as the weekly schedule, your coordinates, Weather API key and so on.
 
 
@@ -139,23 +136,21 @@ For the Raspberry that will do the presence detector
 pip install pythonping
 ```
 
-Now give your smartphones' fixed IPs and add them to the `thermo.py` file.
+Now give your smartphones' fixed IPs and add them to the `params.py` file.
 
 
-### Temperature Raspberry DHT11
+### Temperature Raspberry
 
 For the Raspberry with the temperature sensor:
 
 ```bash
-sudo apt install git-core
-git clone https://github.com/szazo/DHT11_Python.git
-cd DHT11_Python
+sudo apt update
 sudo apt install python3-pip
-pip3 install -U setuptools
-python3 -m pip install .
+sudo python3 -m pip install --upgrade pip setuptools wheel
+sudo pip3 install Adafruit_DHT
 ```
 
-The GPIO pins for the DHT11 temperature sensor that I have used looks like this (Raspberry Pi 4B, 3B+, 3B, 3A+, 2B, B+, A+, Zero, Zero W):
+The GPIO pins for the DHT11 temperature sensor that I have used look like this (Raspberry Pi 4B, 3B+, 3B, 3A+, 2B, B+, A+, Zero, Zero W):
 
 ```
                 |
@@ -169,7 +164,7 @@ The GPIO pins for the DHT11 temperature sensor that I have used looks like this 
 - Pin 7 (GPIO4): Data/out
 
 
-### Temperature Raspberry DHT22
+#### Note on the DHT22
 
 You will need a 10k ohm resistor as per https://pimylifeup.com/raspberry-pi-humidity-sensor-dht22/ instructions, this means you'll either need a board or to solder a bit, which may be inconvenient if you're just starting out. While you could exclude the resistor you will likely start to get unreliable measurements from the sensor.
 
@@ -187,7 +182,6 @@ Pins are like this in the 4-pin white DHT22:
 2: Data
 3: (nothing)
 4: Ground
-
 ```
 
 
@@ -243,23 +237,17 @@ Cronjob (every 5 minutes)
 
 
 
-### Other useful commands
-
-#### To run the script manually do
-
-- `~/thermo.py`
-
-#### To set pin 24 to High
-
-`gpio -g mode 24 out`
-`gpio -g write 24 1`
-
 
 ## Frequently Asked Questions
 
+#### DHT11 or DHT22 sensor, which one should you choose?
+
+The DHT11 is cheaper but less accurate, it cannot detect temperatures below 0°C and humidity-wise is not very precise, so if you live in a cold area or need humidity to be really accurate, get the DHT22. I got the DHT11 when starting this project just because I didn't have any idea if it would even work, now that I've been running Thermostat for more than a year I've just ordered the DHT22.
+
+
 ### How does presence detection work?
 
-I hated the idea of having cameras or microphones listening all the time or watching me so I came with the idea of simply tracking if a specific IP address is connected to the home's Wi-Fi. For example, my mobile phone. If I'm home, my phone will be with me and auto-connect to the Wi-Fi, and disconnect when I leave home.
+I hated the thought of having cameras or microphones listening all the time or watching me so I came with the idea of simply tracking if a specific IP address is connected to the home's Wi-Fi. For example, my mobile phone. If I'm home, my phone will be with me and auto-connect to the Wi-Fi, and disconnect when I leave home.
 
 It doesn't track individually, it just tracks if there's any of the IP addresses in the list connected to the network. You could even set your smart TV to be the device, or a smart bulb, or a desktop computer. If you set your phone and want to become undetected, simply disable Wi-Fi and use cellular data to remain undetected, or change your IP address to another one that's not in the list.
 
@@ -269,6 +257,22 @@ It doesn't track individually, it just tracks if there's any of the IP addresses
 Right now my Raspberry Pi Zero W is using between 0.6 and 0.9W. 
 
 The Raspberry Pi 3 B+ uses 3W but it has Syncthing in it with an old external USB drive, it can go up to 7W whenever it's syncing a lot of stuff and the CPU is at max.
+
+
+
+
+### Other useful commands
+
+#### To run the script manually do
+
+- `~/thermo.py`
+
+#### Relay: To set pin 24 to High via command line
+
+`gpio -g mode 24 out`
+`gpio -g write 24 1`
+
+
 
 
 ## Photos of my setup
@@ -292,3 +296,8 @@ The Raspberry with the DHT11 temperature sensor and the Relay to turn on/off the
 The relay connected to the thermostat:
 
 ![Thermostat on a tablet](photo-relay.jpeg)
+
+This is a screenshot of the web view in a tablet:
+
+![Thermostat view on a tablet](photo-screenshot-tablet.png)
+
