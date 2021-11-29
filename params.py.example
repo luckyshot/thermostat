@@ -3,13 +3,13 @@ import Adafruit_DHT
 
 server_url = 'https://example.com?view=console&auth_token='
 
-enable_sensor_ext = 0
-enable_sensor   = 1 # Temperature sensor
+enable_sensor   = 1 # Temperature sensor (use '2' to get decimal precision in DHT11)
 enable_presence = 1 # Presence detector
 enable_relay    = 0 # Relay switch
 enable_test     = 0 # Dry run, don't send data to server
 
 sensor_model = Adafruit_DHT.DHT22 # Adafruit_DHT.DHT11, Adafruit_DHT.DHT22, Adafruit_DHT.AM2302
-sensor_pin = 17
-relay_channel = 24
-ips = ['192.168.1.1']
+sensor_pin = 17 # GPIO pin number
+sensor_location = 'Living Room' # What should this location be called (e.g. Living Room, Bedroom, Garage, Garden)
+relay_channel = 24 # Relay pin number
+ips = ['192.168.1.1'] # Detect presence based on these IPs

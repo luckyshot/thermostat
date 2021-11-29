@@ -13,7 +13,7 @@ from params import *
 
 f = open(".httoken", "r")
 auth_token = f.read()
-request_url = server_url + auth_token
+request_url = server_url + auth_token + '&location=' + sensor_location
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
