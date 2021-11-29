@@ -42,7 +42,7 @@ _I've posted more photos at the bottom of the README._
 These are the things I bought and have worked for me, your setup may vary.
 
 - [Raspberry Pi](https://amzn.to/2ZswT0E): any model works, I've tested it with 3B+, 4B and Zero W
-- [DHT11 Temperature sensors](https://amzn.to/3tbv3LE): around 3€ each
+- [DHT11 Temperature sensors](https://amzn.to/3tbv3LE): around 1€ each
     - or [DHT22 Temperature sensors](https://amzn.to/3zfUe24): around 6€ each, you may get a 10k Ohm resistor too
 - [Relay switch](https://amzn.to/3teyIbK): 5€
 - [Dupont Cables](https://amzn.to/3wSyWra): 7€, or use any old network/USB cable
