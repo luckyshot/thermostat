@@ -5,6 +5,7 @@ import os
 #import time
 import requests
 import Adafruit_DHT
+import dht11
 import RPi.GPIO as GPIO
 
 from params import *
@@ -28,14 +29,25 @@ if enable_sensor == 1:
     print('Humidity: ' + str(humidity))
 
     if humidity is not None and temperature is not None:
-        if enable_sensor_ext: # exterior sensor
-            request_url += '&temperature_ext=' + str(temperature)
-            request_url += '&humidity_ext=' + str(humidity)
-        else:
-            request_url += '&temperature=' + str(temperature)
-            request_url += '&humidity=' + str(humidity)
+        request_url += '&temperature=' + str(temperature)
+        request_url += '&humidity=' + str(humidity)
     else:
         print('Failed to get sensor reading')
+
+# using szazo library gives decimal precision in DHT11
+if enable_sensor == 2:
+    print('Send temperature and humidity')
+    instance = dht11.DHT11(pin = sensor_pin)
+    result = instance.read()
+
+    print('Temperature: ' + str(result.temperature))
+    print('Humidity: ' + str(result.humidity))
+
+    if result.is_valid():
+        request_url += '&temperature=' + str(result.temperature)
+        request_url += '&humidity=' + str(result.humidity)
+    else:
+        print("ERROR: %d" % result.error_code)
 
 
 # PRESENCE: Ping devices IP
