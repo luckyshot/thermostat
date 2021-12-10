@@ -9,14 +9,18 @@ _I've posted more photos at the bottom of the README._
 
 ## ⭐ Features
 
+- Access your thermostat from anywhere in the world
 - Control your home thermostat with your phone, laptop or tablet
 - Clean web interface with Temperature and Humidity charts
 - Weather data from external API (wind speed, pressure, etc.)
-- Unlimited sensors for indoors and outdoors
-- Access your thermostat from anywhere in the world
+- Unlimited sensors for multiple rooms, outdoors, etc.
+- Unlimited schedules to customize temperature ranges during the day and week
+- Timers to turn the thermostat on for a few minutes/hours
+- Charts to analyze temperature/humidity evolution
+- API to show weather, sunset times and next rain
 - Privacy-respectful presence detection that turns thermostat off automatically if nobody is home
 - Compatible with extremely old devices (iPad 1, etc.) so you can give them another life
-- Extremely easy to set up, no compiling, frameworks or libraries needed, just vanilla JS and PHP
+- Extremely easy to set up, no compiling, frameworks or libraries needed, just vanilla JS and PHP (and a few lines of Python)
 - Extremely easy to hack and customize to your liking
 
 
@@ -33,7 +37,7 @@ _I've posted more photos at the bottom of the README._
 ### Setup overview
 
 - Python script on each Raspberry Pi (with a 5 min cronjob)
-- PHP script on web server with a few files (no MySQL database needed)
+- PHP script on web server with a few files (no database needed)
 - (optional) A free API key from openweathermap to get your location's weather
 
 
@@ -66,6 +70,9 @@ Raspberry 1 will detect indoor temperature and presence, and Raspberry 2 will de
 My Thermostat activates through a cable running at 26.7VAC 8.68mA (measured thanks to the Multimeter I bought for 15€). When this cable is bridged it turns ON, and when you unbridge it it turns Off. I got a relay which can handle up to 250V and 10A, it's inexpensive and you'd better get something decent for safety reasons and so you can reuse for other projects.
 
 
+- *December 2021 update*: I've upgraded my setup and now have two sensors at home, one for my Living Room and one for my Bedroom, while keeping the Outdoors one.
+
+
 ### ℹ️ Overview
 
 - Raspberry 1 (indoors, living room)
@@ -81,8 +88,7 @@ My Thermostat activates through a cable running at 26.7VAC 8.68mA (measured than
     - Software:
         - Send temperature
         - GET `/status` to see if 1 or 0 and turn on or off the rele (HARD)
-- Web Server (PHP, SQLite, Apache):
-    `sudo apt install php7.4-sqlite3`
+- Web Server (PHP):
     - PHP script
         - Web portal
             - User Interface
@@ -109,11 +115,7 @@ Rename `params.py.example` to `params.py` and modify its settings for each Raspb
 
 ### 📟 Web Server
 
-A PHP server with SQLite.
-
-```sh
-sudo apt install php7.4-sqlite3
-```
+A PHP server. No need for MySQL or SQLite.
 
 
 ### 📟 Thermostat Raspberry
@@ -149,6 +151,8 @@ sudo apt install python3-pip
 sudo python3 -m pip install --upgrade pip setuptools wheel
 sudo pip3 install Adafruit_DHT
 ```
+
+If you are getting errors installing Adafruit, specially in special Linux distros like OSMC, try: `sudo apt-get install build-essential python3-dev`.
 
 The GPIO pins for the DHT11 temperature sensor that I have used look like this (Raspberry Pi 4B, 3B+, 3B, 3A+, 2B, B+, A+, Zero, Zero W):
 
@@ -215,11 +219,17 @@ Install the script on all your Raspberry Pi:
 ```bash
 nano thermo.py
 # Paste the thermo.py code
+nano params.py
+# Paste the params.py code
 # Customize the tasks you want this Raspberry to do
 # Save the file and exit nano
 chmod u+x thermo.py
-./thermo.py
+chmod u+x params.py
+sudo python3 ./thermo.py
 ```
+
+_Running the script without sudo will give a `RuntimeError: Error accessing GPIO.` error_
+
 
 Install the cron on all your Raspberry Pi
 
@@ -258,14 +268,6 @@ Right now my Raspberry Pi Zero W is using between 0.6 and 0.9W.
 
 The Raspberry Pi 3 B+ uses 3W but it has Syncthing in it with an old external USB drive, it can go up to 7W whenever it's syncing a lot of stuff and the CPU is at max.
 
-
-
-## 📋 To Do
-
-- Multi-room: right now it's limited to 2 sensors (e.g. indoors+outdoors), make it so we can have several rooms and also choose which ones trigger the thermostat switch, UI should adapt automatically to display all rooms
-- Weekly Schedule: be able to set an end time past midnight (e.g. 7:00am to 2:30am)
-- Clean up: delete old data, keep just max/min daily temperature/humidity
-- Bug: when the temp sensor fails it doesn't send any request so it doesn't receive the status, should retry sensor once more
 
 
 ### Other useful commands
