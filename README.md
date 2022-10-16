@@ -269,6 +269,11 @@ Right now my Raspberry Pi Zero W is using between 0.6 and 0.9W.
 The Raspberry Pi 3 B+ uses 3W but it has Syncthing in it with an old external USB drive, it can go up to 7W whenever it's syncing a lot of stuff and the CPU is at max.
 
 
+### I get this error: 'RuntimeError: Error accessing GPIO.'
+
+You need to run the Python script as sudo: `sudo ./thermo.py` for the GPIO pins to be accessiblr.
+
+
 
 ### Other useful commands
 
