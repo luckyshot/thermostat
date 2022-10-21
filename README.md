@@ -1,7 +1,7 @@
 🌡 Thermostat
 =======================
 
-Smart Home Thermostat with Web interface, customizable options, weekly On/Off schedule programming, presence detector (respects privacy) and weather data.
+Smart Home Thermostat with Web interface, customizable options, weekly On/Off schedule programming, privacy-friendly presence detector and weather data.
 
 ![Thermostat on an iPad 1](images/photo-ipad-1.jpeg)
 
@@ -12,13 +12,12 @@ _I've posted more photos at the bottom of the README._
 - Access your thermostat from anywhere in the world
 - Control your home thermostat with your phone, laptop or tablet
 - Clean web interface with Temperature and Humidity charts
-- Weather data from external API (wind speed, pressure, etc.)
-- Unlimited sensors for multiple rooms, outdoors, etc.
+- Weather data from external API (wind speed and direction, sunrise and sunset times, next rain due, etc.)
+- Unlimited sensors for multiple rooms, indoors/outdoors, etc.
 - Unlimited schedules to customize temperature ranges during the day and week
 - Timers to turn the thermostat on for a few minutes/hours
 - Charts to analyze temperature/humidity evolution
-- API to show weather, sunset times and next rain
-- Privacy-respectful presence detection that turns thermostat off automatically if nobody is home
+- Privacy-friendly presence detection that turns thermostat off automatically if nobody is home
 - Compatible with extremely old devices (iPad 1, etc.) so you can give them another life
 - Extremely easy to set up, no compiling, frameworks or libraries needed, just vanilla JS and PHP (and a few lines of Python)
 - Extremely easy to hack and customize to your liking
@@ -29,16 +28,16 @@ _I've posted more photos at the bottom of the README._
 
 ## What you need (minimum-ideal)
 
-- 1 or 2 Raspberry Pi (non-exclusive, you can use them for other things simultaneously such as for Kodi, Syncthing or PiHole)
-- 1 temperature sensor for each Raspberry
+- 1 or more Raspberry Pi (non-exclusive, you can use them for other things simultaneously such as for Kodi/OSMC, Syncthing or PiHole)
+- 1 temperature sensor for each place you want to detect the temperature
 - 1 relay switch to turn ON-OFF the thermostat
-- Cable (Dupont wires, although any old/broken USB or phone cable works too)
+- Cable (Dupont wires, although any old USB or phone cable works too)
 
 ### Setup overview
 
-- Python script on each Raspberry Pi (with a 5 min cronjob)
-- PHP script on web server with a few files (no database needed)
-- (optional) A free API key from openweathermap to get your location's weather
+- Put a Python script on each Raspberry Pi (with a 5 min cronjob)
+- Upload a PHP script on a web server with a few files (no database needed)
+- (optional) A free API key from OpenWeatherMap to get your location's weather
 
 
 ### 🛒 Shopping list
@@ -49,28 +48,28 @@ These are the things I bought and have worked for me, your setup may vary.
 - [DHT11 Temperature sensors](https://amzn.to/3tbv3LE): around 1€ each
     - or [DHT22 Temperature sensors](https://amzn.to/3zfUe24): around 6€ each, you may get a 10k Ohm resistor too
 - [Relay switch](https://amzn.to/3teyIbK): 5€
-- [Dupont Cables](https://amzn.to/3wSyWra): 7€, or use any old network/USB cable
+- (optional) [Dupont Cables](https://amzn.to/3wSyWra): 7€, or use any old network/USB cable
 - (optional) [Multimeter](https://amzn.to/2Q3ownQ): 15€
 - (optional) [Cheap web server](https://xaviesteve.com/go/hetzner): link gets you 5 months free on a 4€/month server
 
-TOTAL: 34€ (for a 300-500€ thermostat! 🥳)
+TOTAL: 34€ max (for a fully featured smart thermostat that costs around 300-500€! 🥳)
 
 
 ### ✅ Compatibility
 
-Compatible with very old devices (including iPad 1 and probably old Internet Explorers) so you can use retired devices as controllers/displays, they just need a somewhat decent web browser. The Web interface has been coded in a way that doesn't require too modern web technologies.
+Compatible with very old devices (including iPad 1 and probably old Internet Explorers) so you can use retired devices as controllers/displays, they just need a decent web browser. The Web interface has been coded in a way that doesn't require too modern web technologies.
 
 
 ## 🤩 My setup
 
-I've got two Raspberry Pi: one I use it for watching TV (using OSMC + Kodi) so it sits besides my TV in the living room and the other one is a file backup generator (using Syncthing) placed next to my thermostat.
+I've got two Raspberry Pi: one I use it for watching TV (using OSMC + Kodi) so it sits besides my TV in the living room and the other one (Raspberry 2) is a file backup generator (using Syncthing) placed next to my heater.
 
-Raspberry 1 will detect indoor temperature and presence, and Raspberry 2 will detect outdoors temperature and activate the Thermostat On/Off through the relay.
+Raspberry 1 will detect indoor temperature and presence, and Raspberry 2 will detect outdoors temperature and activate the heater On/Off through the relay.
 
-My Thermostat activates through a cable running at 26.7VAC 8.68mA (measured thanks to the Multimeter I bought for 15€). When this cable is bridged it turns ON, and when you unbridge it it turns Off. I got a relay which can handle up to 250V and 10A, it's inexpensive and you'd better get something decent for safety reasons and so you can reuse for other projects.
+My Thermostat activates through a cable running at 26.7VAC 8.68mA (measured thanks to the Multimeter I bought). When this cable is bridged it turns ON, and when you unbridge it, it turns Off. I got a relay which can handle up to 250V and 10A, it's inexpensive and you can reuse for other projects.
 
 
-- *December 2021 update*: I've upgraded my setup and now have two sensors at home, one for my Living Room and one for my Bedroom, while keeping the Outdoors one.
+- *December 2021 update*: I've upgraded my setup and now have two sensors at home, one for my Living Room and one for my Bedroom, while keeping the Outdoors one. Thermostat allows you to program which room to check for the perfect temperature based on the time of the day, so at night, it checks the bedroom temp while during the day it keeps track of the living room. Some photos and documentation may still be based on the old setup, to put it simply, adding a new temp sensor in my bedroom I can now keep track of fluctuations of temperature in the house (see if someone left the window open for too long) and to activate the thermostat only when it needs to.
 
 
 ### ℹ️ Overview
@@ -115,12 +114,19 @@ Rename `params.py.example` to `params.py` and modify its settings for each Raspb
 
 ### 📟 Web Server
 
-A PHP server. No need for MySQL or SQLite.
+A PHP server publicly accessible so we can open it from anywhere in the world, we use a token to connect to it so no one except you can access it. 
+
+No need for a database (MySQL/MariaDB, SQLite, etc.) since we use a simple file to store all data.
+
+Just upload the files to the server once you've customized the parameters and you're good to go, no installation process is needed.
+
+
+We are now going to go through the things you need to set up in your Raspberries, note that you can have one Raspberry do every role, or not, whatever you prefer:
 
 
 ### 📟 Thermostat Raspberry
 
-For the Raspberry with the Thermostat ON/OFF Relay:
+For the Raspberry with the Thermostat ON/OFF Relay that is wired to the heater:
 
 ```bash
 sudo apt update
@@ -132,7 +138,7 @@ sudo apt install wiringpi
 
 ### 📟 Presence Raspberry
 
-For the Raspberry that will do the presence detector
+For the Raspberry that will do the presence detector:
 
 ```bash
 pip install pythonping
@@ -152,9 +158,9 @@ sudo python3 -m pip install --upgrade pip setuptools wheel
 sudo pip3 install Adafruit_DHT
 ```
 
-If you are getting errors installing Adafruit, specially in special Linux distros like OSMC, try: `sudo apt-get install build-essential python3-dev`.
+If you are getting errors installing Adafruit, specially in Linux distros like OSMC that have trimmed down packages, try: `sudo apt-get install build-essential python3-dev`.
 
-The GPIO pins for the DHT11 temperature sensor that I have used look like this (Raspberry Pi 4B, 3B+, 3B, 3A+, 2B, B+, A+, Zero, Zero W):
+The GPIO pins (Raspberry Pi 4B, 3B+, 3B, 3A+, 2B, B+, A+, Zero, Zero W) for the DHT11 temperature sensor that I have used look like this:
 
 ```
                 |
@@ -201,12 +207,14 @@ The GPIO pins for the DHT11 temperature sensor that I have used look like this (
 
 ##### Note on the DHT22
 
-You will need a 10k ohm resistor as per https://pimylifeup.com/raspberry-pi-humidity-sensor-dht22/ instructions, this means you'll either need a board or to solder a bit, which may be inconvenient if you're just starting out. While you could exclude the resistor you will likely start to get unreliable measurements from the sensor.
+The DHT22 is a bit more expensive and gives better temperature/humidity readings, specially in cold weather. I have both at home, I don't really care if it's 18.5C or 19.0C outside, so the DHT11 is outside and the DHT22 are indoors.
+
+Some users report you need a 10k ohm resistor as per https://pimylifeup.com/raspberry-pi-humidity-sensor-dht22/ instructions, this means you'll either need a board or to solder a bit, which may be inconvenient if you're just starting out. While you could exclude the resistor you will likely start to get unreliable measurements from the sensor. In my case, I am not using the resistor and the readings are fine, the Thermostat code already detects some of these missreadings and avoids them. Read the FAQs if you are not sure which one to get.
 
 
 ### 📟 All Raspberries
 
-Set a static IP on all your Raspberry Pi
+Set a static IP on all your Raspberry Pi:
 
 ```bash
 sudo nano /etc/resolv.conf
@@ -243,7 +251,7 @@ chmod u+x params.py
 sudo python3 ./thermo.py
 ```
 
-_Running the script without sudo will give a `RuntimeError: Error accessing GPIO.` error_
+_Running the script without sudo may give a `RuntimeError: Error accessing GPIO.` error_
 
 
 Install the cron on all your Raspberry Pi
@@ -253,7 +261,7 @@ sudo apt install cron
 crontab -e
 ```
 
-Cronjob (every 5 minutes)
+Cronjob (every 5 minutes, running more frequently is not really necessary and will probably log way too much data in such a short time range):
 
 ```bash
 @reboot /home/pi/thermo.py
