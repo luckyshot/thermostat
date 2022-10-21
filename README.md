@@ -168,11 +168,22 @@ The GPIO pins for the DHT11 temperature sensor that I have used look like this (
 - Pin 7 (GPIO4): Data/out
 
 
-#### Note on the DHT22
+#### Pins on the 3-pin blue DHT11:
 
-You will need a 10k ohm resistor as per https://pimylifeup.com/raspberry-pi-humidity-sensor-dht22/ instructions, this means you'll either need a board or to solder a bit, which may be inconvenient if you're just starting out. While you could exclude the resistor you will likely start to get unreliable measurements from the sensor.
+```
+###
+###
+###
+|||
 
-Pins are like this in the 4-pin white DHT22:
+123
+
+1: Voltage
+2: Data
+3: Ground
+```
+
+#### Pins on the 4-pin white DHT22:
 
 ```
 ####
@@ -187,6 +198,10 @@ Pins are like this in the 4-pin white DHT22:
 3: (nothing)
 4: Ground
 ```
+
+##### Note on the DHT22
+
+You will need a 10k ohm resistor as per https://pimylifeup.com/raspberry-pi-humidity-sensor-dht22/ instructions, this means you'll either need a board or to solder a bit, which may be inconvenient if you're just starting out. While you could exclude the resistor you will likely start to get unreliable measurements from the sensor.
 
 
 ### 📟 All Raspberries
