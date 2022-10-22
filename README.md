@@ -205,6 +205,11 @@ The GPIO pins (Raspberry Pi 4B, 3B+, 3B, 3A+, 2B, B+, A+, Zero, Zero W) for the 
 4: Ground
 ```
 
+##### Note on the DHT11
+
+In your `params.py`, you may use `enable_sensor = 2` instead of `1` to use the alternative library (*szazo*) which gives you decimal precision.
+
+
 ##### Note on the DHT22
 
 The DHT22 is a bit more expensive and gives better temperature/humidity readings, specially in cold weather. I have both at home, I don't really care if it's 18.5C or 19.0C outside, so the DHT11 is outside and the DHT22 are indoors.
