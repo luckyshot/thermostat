@@ -155,7 +155,7 @@ For the Raspberry with the temperature sensor:
 sudo apt update
 sudo apt install python3-pip
 sudo python3 -m pip install --upgrade pip setuptools wheel
-sudo pip3 install Adafruit_DHT
+sudo pip3 install Adafruit_DHT dht11
 ```
 
 If you are getting errors installing Adafruit, specially in Linux distros like OSMC that have trimmed down packages, try: `sudo apt-get install build-essential python3-dev`.
